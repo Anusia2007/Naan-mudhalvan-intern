@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Leave Management Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>HR Employee Leave Management</h1>
+
+    <div class="form-box">
+        <input type="text" id="empName" placeholder="Employee Name">
+        <input type="text" id="leaveReason" placeholder="Leave Reason">
+        <input type="date" id="leaveDate">
+
+        <select id="status">
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+
+        <button onclick="addLeave()">Apply Leave</button>
+    </div>
+
+    <div class="filter-box">
+        <input type="text" id="search" placeholder="Search Employee" onkeyup="filterEmployee()">
+    </div>
+
+    <div class="dashboard">
+        <div class="card pending">
+            <h2 id="pendingCount">0</h2>
+            <p>Pending</p>
+        </div>
+
+        <div class="card approved">
+            <h2 id="approvedCount">0</h2>
+            <p>Approved</p>
+        </div>
+
+        <div class="card rejected">
+            <h2 id="rejectedCount">0</h2>
+            <p>Rejected</p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Reason</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="leaveTable"></tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
