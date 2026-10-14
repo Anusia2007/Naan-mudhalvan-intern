@@ -1,7 +1,6 @@
-let leaves = [];
+let leaves = JSON.parse(localStorage.getItem("leaves")) || [];
 
 function addLeave() {
-
     let name = document.getElementById("empName").value;
     let reason = document.getElementById("leaveReason").value;
     let date = document.getElementById("leaveDate").value;
@@ -12,12 +11,8 @@ function addLeave() {
         return;
     }
 
-    leaves.push({
-        name,
-        reason,
-        date,
-        status
-    });
+    leaves.push({ name, reason, date, status });
+    localStorage.setItem("leaves", JSON.stringify(leaves));
 
     displayLeaves();
     updateDashboard();
@@ -28,12 +23,10 @@ function addLeave() {
 }
 
 function displayLeaves(){
-
     let table = document.getElementById("leaveTable");
     table.innerHTML = "";
 
     leaves.forEach(leave => {
-
         table.innerHTML += `
         <tr>
             <td>${leave.name}</td>
@@ -45,7 +38,6 @@ function displayLeaves(){
 }
 
 function updateDashboard(){
-
     let pending = leaves.filter(l => l.status === "Pending").length;
     let approved = leaves.filter(l => l.status === "Approved").length;
     let rejected = leaves.filter(l => l.status === "Rejected").length;
@@ -56,17 +48,14 @@ function updateDashboard(){
 }
 
 function filterEmployee(){
-
     let search = document.getElementById("search").value.toLowerCase();
     let rows = document.querySelectorAll("#leaveTable tr");
 
     rows.forEach(row => {
         let employee = row.cells[0].innerText.toLowerCase();
-
-        if(employee.includes(search)){
-            row.style.display = "";
-        }else{
-            row.style.display = "none";
-        }
+        row.style.display = employee.includes(search) ? "" : "none";
     });
 }
+
+displayLeaves();
+updateDashboard();
